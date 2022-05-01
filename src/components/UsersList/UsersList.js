@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 function UsersList({ users }) {
   return (
@@ -8,7 +9,9 @@ function UsersList({ users }) {
       {users.map((user) => {
         return (
           <ul key={user.id}>
-            <Link to={`/profile/${user.login}`}>Usuario: {user.login}</Link>
+            <Link to={`/profile/${user.login}`} target="_blank">
+              Usuario: {user.login}
+            </Link>
             <li>Id: {user.id}</li>
           </ul>
         );
