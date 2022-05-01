@@ -1,6 +1,6 @@
 import React from "react";
 
-function Error({ msge }) {
+function Error({ msge = "" }) {
   return (
     <div>
       <p style={{ color: "red" }}>{msge}</p>
