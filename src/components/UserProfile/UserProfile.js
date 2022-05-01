@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "../Loading/Loading";
 import Error from "../Error";
+import { searchProfileDetails } from "../../utils/endpoints";
 
 function UserProfile() {
   const { id } = useParams();
@@ -11,7 +12,7 @@ function UserProfile() {
 
   const searchUser = async () => {
     try {
-      const { data } = await axios.get(`https://api.github.com/users/${id}`);
+      const data = await searchProfileDetails(id);
       setUserData(data);
     } catch (error) {
       console.log("Error: ", error);

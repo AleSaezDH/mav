@@ -3,6 +3,7 @@ import axios from "axios";
 import Error from "../../Error";
 import UsersList from "../../UsersList";
 import Loading from "../../Loading/Loading";
+import { searchByUser } from "../../../utils/endpoints";
 
 function Home() {
   const errorsObject = {
@@ -31,9 +32,7 @@ function Home() {
     try {
       setLoading(true);
       let finalUserName = userName.replace(/\s+/g, ""); // elimina cualquier espacio en el nombre de usuario
-      const { data } = await axios.get(
-        `https://api.github.com/search/users?q=${finalUserName}`
-      );
+      const data = await searchByUser(finalUserName);
       const firstTenUsers = data.items.slice(0, 10); // la api no acepta limit por ende implemento slice
       if (firstTenUsers.length === 0) {
         setErrors({ ...errors, searchError: true });
