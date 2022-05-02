@@ -1,70 +1,25 @@
-# Getting Started with Create React App
+# Readme
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## ¿Cómo correr la aplicación?
 
-## Available Scripts
+Primero se debe estar ubicado en la carpeta que se descargó desde GitHub. Luego ejecutar el siguiente comando:
 
-In the project directory, you can run:
+### npm install
 
-### `yarn start`
+Y por último
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### npm start
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Se abrirá automáticamente el navegador en la ruta http://localhost:3000
 
-### `yarn test`
+# Algunas aclaraciones para los destinatarios de esta aplicación
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Traté de hacer una aplicación escalable, es decir, pensando en que más personas tocarían el código en un futuro por ende intenté delegar responsabilidades lo más que pude. Es por esto que creé hooks personalizados y una carpeta utils con funciones para ser reutilizadas en caso de ser necesario.
 
-### `yarn build`
+Al clickear en algún usuario se abre una nueva pestaña porque de esta manera podía mantener el listado de usuarios. Pensé en agregar context o incluso session storage para poder tener la información disponible en caso de ir a algún perfil de usuario y volver a inicio para que el listado de usuarios buscados siga ahí. Pero quizá era complicarlo demasiado, creo que de esta manera lo solucioné bien.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Para las validaciones del formulario había pensado en deshabilitar el botón si no cumplía con los requisitos. Es una posibilidad que queda abierta y dejé el código comentado en caso de querer implementarla. Intenté cubrir todas las posibilidades de error, inclusive si escribieran con espacios en el input.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Aprovechando el componente Errors, también agregué las validaciones en caso de ingresar a la url de algún usuario y tratar de modificarla para buscar algo que no estuviera permitido y agregué una ruta particular para manejar los not found.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+En relación a lo mencionado anteriormente, intenté eliminar toda responsabilidad del componente Home en cuanto a manejo de errores. Quería que quedara lo más limpio posible y que se encargue solamente de traer la información de usuarios y enviarla al siguiente componente. Con respecto al useLoading entiendo que no cumple gran funcionalidad y que, de hecho, no es 100% necesario pero al necesitar un loader en más de un componente creo que fue una buena opción para reutilizar código y evitar crear un estado propio dentro de todos los componentes en los que lo necesite.

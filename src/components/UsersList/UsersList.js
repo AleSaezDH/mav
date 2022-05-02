@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 // Estilos
 import "./styles.css";
@@ -42,5 +43,13 @@ function UsersList({ users }) {
     </section>
   );
 }
+
+UsersList.propTypes = {
+  users: PropTypes.object.isRequired,
+};
+
+UsersList.defaultProps = {
+  users: {},
+};
 
 export default UsersList;
