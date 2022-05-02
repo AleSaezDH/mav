@@ -10,7 +10,7 @@ function Error({ msge = "", type }) {
       type={type}
       closable
       className="error-alert"
-      style={{ marginTop: 20 }}
+      style={{ marginTop: 20, maxWidth: 325 }}
     />
   );
 }

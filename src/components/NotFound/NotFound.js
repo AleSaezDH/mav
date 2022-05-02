@@ -1,12 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// Estilos
+import { Result } from "antd";
+
 function NotFound() {
   return (
-    <div>
-      <h1>Página no Encontrada</h1>
-      <Link to="/">Volver a inicio</Link>
-    </div>
+    <Result
+      status="404"
+      title="404"
+      subTitle="Página no Encontrada"
+      extra={<Link to="/">Volver a inicio</Link>}
+    />
   );
 }
 

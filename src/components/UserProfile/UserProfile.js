@@ -4,6 +4,10 @@ import { searchProfileDetails } from "../../utils/endpoints";
 import useErrors from "../../hooks/useErrors";
 import useLoading from "../../hooks/useLoading";
 
+// Estilos
+import "./styles.css";
+import { Button } from "antd";
+
 function UserProfile() {
   const { id } = useParams();
   const [userData, setUserData] = useState({});
@@ -35,21 +39,55 @@ function UserProfile() {
   }, [id]);
 
   return (
-    <div>
-      <h1>Perfil de Usuario</h1>
+    <section>
+      {Object.keys(userData).length !== 0 && (
+        <>
+          <article className="userProfile-container">
+            <ul className="data-container">
+              <img src={userData.avatar_url} />
+              <div className="li-container">
+                <li>Nombre: {userData.name}</li>
+                <li>Usuario de GitHub: {userData.login}</li>
+                <li>Repositorios públicos: {userData.public_repos}</li>
+                <li>Fecha de creación: {userData.created_at}</li>
+              </div>
+            </ul>
+          </article>
 
-      {loading && <Loading />}
+          <article className="link-button">
+            <Button type="primary">
+              <a href={userData.html_url} target="_blank">
+                Ver GitHub
+              </a>
+            </Button>
+          </article>
+        </>
+      )}
 
-      <ul>
-        <li>{userData.login}</li>
-        <img src={userData.avatar_url} />
-        <li>{userData.bio}</li>
-      </ul>
+      {loading && (
+        <article className="loading-container">
+          <Loading />
+        </article>
+      )}
 
-      {errors.searchError.state && <Error msge={errors.searchError.msge} />}
-      {errors.inputError.state && <Error msge={errors.inputError.msge} />}
-      {errors.reactError.state && <Error msge={errors.reactError.msge} />}
-    </div>
+      {errors.searchError.state && (
+        <article className="errors-container">
+          <Error msge={errors.searchError.msge} type="error" />
+        </article>
+      )}
+
+      {errors.inputError.state && (
+        <article className="errors-container">
+          <Error msge={errors.inputError.msge} type="error" />
+        </article>
+      )}
+
+      {errors.reactError.state && (
+        <article className="errors-container">
+          <Error msge={errors.reactError.msge} type="error" />
+        </article>
+      )}
+    </section>
   );
 }
 

@@ -1,0 +1,39 @@
+.userProfile-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.data-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding: 0 100px;
+    margin: 0;
+}
+
+.li-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 100px 0;
+    font-size: 23px;
+}
+
+.link-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 90px;
+}
+
+.loading-container{
+    padding-top: 200px;
+}
+
+.errors-container {
+    display: flex;
+    justify-content: center;
+}
