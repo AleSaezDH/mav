@@ -1,22 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import Loading from "../Loading/Loading";
 import Error from "../Error";
 import { searchProfileDetails } from "../../utils/endpoints";
+import useErrors from "../../hooks/useErrors";
+import useLoading from "../../hooks/useLoading";
 
 function UserProfile() {
   const { id } = useParams();
   const [userData, setUserData] = useState({});
-  const [error, setError] = useState(false);
+  const { errors, firstValidatorFunction, fourthValidatorFunction } =
+    useErrors();
+  const { loading, setLoading, Loading } = useLoading();
 
   const searchUser = async () => {
+    const validatedUserName = firstValidatorFunction(id);
+    if (
+      validatedUserName.inputError.state ||
+      validatedUserName.reactError.state
+    )
+      return;
     try {
+      setLoading(true);
       const data = await searchProfileDetails(id);
       setUserData(data);
+      setLoading(false);
     } catch (error) {
       console.log("Error: ", error);
-      setError(true);
+      fourthValidatorFunction();
+      setLoading(false);
     }
   };
 
@@ -27,15 +38,18 @@ function UserProfile() {
   return (
     <div>
       <h1>Perfil de Usuario</h1>
-      {Object.keys(userData).length == 0 && !error ? <Loading /> : null}
+
+      {loading && <Loading />}
+
       <ul>
         <li>{userData.login}</li>
         <img src={userData.avatar_url} />
         <li>{userData.bio}</li>
       </ul>
-      {error && (
-        <Error msge="No hay resultados disponibles para esa búsqueda" />
-      )}
+
+      {errors.searchError.state && <Error msge={errors.searchError.msge} />}
+      {errors.inputError.state && <Error msge={errors.inputError.msge} />}
+      {errors.reactError.state && <Error msge={errors.reactError.msge} />}
     </div>
   );
 }
