@@ -1,10 +1,17 @@
 import React from "react";
 
-function Error({ msge = "" }) {
+// Estilos
+import { Alert } from "antd";
+
+function Error({ msge = "", type }) {
   return (
-    <div>
-      <p style={{ color: "red" }}>{msge}</p>
-    </div>
+    <Alert
+      message={msge}
+      type={type}
+      closable
+      className="error-alert"
+      style={{ marginTop: 20 }}
+    />
   );
 }
 

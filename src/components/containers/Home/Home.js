@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import Error from "../../Error";
 import UsersList from "../../UsersList";
-import Loading from "../../Loading/Loading";
 import { searchByUser } from "../../../utils/endpoints";
 import useErrors from "../../../hooks/useErrors";
 import useLoading from "../../../hooks/useLoading";
+import githublogo from "../../../assets/githublogo.png";
+
+// Estilos
+import "./styles.css";
+import { Input, Button } from "antd";
 
 function Home() {
   const [userName, setUserName] = useState("");
@@ -15,6 +18,7 @@ function Home() {
     firstValidatorFunction,
     secondValidatorFunction,
     thirdValidatorFunction,
+    Error,
   } = useErrors();
   const { loading, setLoading, Loading } = useLoading();
 
@@ -27,6 +31,7 @@ function Home() {
 
   const searchUsers = async (e) => {
     e.preventDefault();
+    setUserData([]);
     let finalUserName = deleteSpacesInUserName();
     const validatedUserName = firstValidatorFunction(finalUserName);
     if (
@@ -51,14 +56,19 @@ function Home() {
   };
 
   return (
-    <>
+    <section className="home-container">
+      <img className="home-img" src={githublogo} />
       <form onSubmit={searchUsers}>
-        <input
+        <Input
           type="text"
           placeholder="Ej: Leandro"
+          size="large"
           onChange={handleInputChange}
         />
-        <input type="submit" />
+
+        <Button type="primary" htmlType="submit" size="large">
+          Buscar
+        </Button>
         {/* disabled={userNameLength <= 3 ? true : false} */}
       </form>
 
@@ -66,10 +76,16 @@ function Home() {
 
       {userData.length != 0 && <UsersList users={userData} />}
 
-      {errors.inputError.state && <Error msge={errors.inputError.msge} />}
-      {errors.searchError.state && <Error msge={errors.searchError.msge} />}
-      {errors.reactError.state && <Error msge={errors.reactError.msge} />}
-    </>
+      {errors.inputError.state && (
+        <Error msge={errors.inputError.msge} type="error" />
+      )}
+      {errors.searchError.state && (
+        <Error msge={errors.searchError.msge} type="error" />
+      )}
+      {errors.reactError.state && (
+        <Error msge={errors.reactError.msge} type="error" />
+      )}
+    </section>
   );
 }
 

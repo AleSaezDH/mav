@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Error from "../Error";
 import { searchProfileDetails } from "../../utils/endpoints";
 import useErrors from "../../hooks/useErrors";
 import useLoading from "../../hooks/useLoading";
@@ -8,7 +7,7 @@ import useLoading from "../../hooks/useLoading";
 function UserProfile() {
   const { id } = useParams();
   const [userData, setUserData] = useState({});
-  const { errors, firstValidatorFunction, fourthValidatorFunction } =
+  const { errors, firstValidatorFunction, fourthValidatorFunction, Error } =
     useErrors();
   const { loading, setLoading, Loading } = useLoading();
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Error from "../components/Error";
 
 function useErrors() {
   const errorsObject = {
@@ -63,6 +64,7 @@ function useErrors() {
     secondValidatorFunction,
     thirdValidatorFunction,
     fourthValidatorFunction,
+    Error,
   };
 }
 
